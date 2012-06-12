@@ -10,3 +10,8 @@
 *.lai
 *.la
 *.a
+
+# generated files/folders
+/x86/
+/arm/
+/translations/

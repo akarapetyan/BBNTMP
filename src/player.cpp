@@ -69,7 +69,7 @@ void Player::configureAudioVideo()
 	}
 }
 
-void Player::startPlayback()
+void Player::startPlayback(const QString& fileName)
 {
 	// Build up the path where our bundled resource is.
 	char cwd[PATH_MAX];
@@ -85,7 +85,8 @@ void Player::startPlayback()
 	}
 
 	// Start the playback.
-	if (mmr_input_attach(mmr_context, media_file, "track") != 0) {
+	//if (mmr_input_attach(mmr_context, media_file, "track") != 0) {
+	if (mmr_input_attach(mmr_context, fileName.toStdString().c_str(), "track") != 0) {
 		//const mmr_error_info_t* ptr = mmr_error_info(mmr_context);
 		throw exception(EXIT_FAILURE);
 	}
@@ -221,13 +222,13 @@ void Player::destroyScreen()
 
 //Use exceptions mechanism
 
-void Player::runPlayer()
+void Player::runPlayer(const QString& fileName)
 {
 	createWindow();
 	connectToMMR();
 	configureAudioVideo();
 	makeWindowVisible();
-	startPlayback();
+	startPlayback(fileName);
 	screen_request_events(screen_context);
 	navigator_request_events(0);
 	handleKeyboardEvents();

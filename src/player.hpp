@@ -15,13 +15,13 @@ class Player : public QObject
 
 public:
     Player();
-    void runPlayer();
+    void runPlayer(const QString&);
     ~Player();
 
 private:
     void connectToMMR();
     void configureAudioVideo();
-    void startPlayback();
+    void startPlayback(const QString&);
     void handleKeyboardEvents();
     void detachFromMMR();
     void createWindow();

@@ -1,3 +1,8 @@
+/**
+ * @file window.cpp
+ * @brief Contains the implementation of UI widget class used as a GUI in the Video Player application
+ */
+
 #include <bb/cascades/Application>
 #include <bb/cascades/Color>
 #include <bb/cascades/Container>

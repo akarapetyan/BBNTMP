@@ -1,6 +1,11 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+/**
+ * @file player.hpp
+ * @brief Contains the implementation of video player functionality
+ */
+
 #include <QtCore/QObject>
 
 #include <mm/renderer.h>
@@ -15,13 +20,13 @@ class Player : public QObject
 
 public:
     Player();
-    void runPlayer();
+    void runPlayer(const QString&);
     ~Player();
 
 private:
     void connectToMMR();
     void configureAudioVideo();
-    void startPlayback();
+    void startPlayback(const QString&);
     void handleKeyboardEvents();
     void detachFromMMR();
     void createWindow();

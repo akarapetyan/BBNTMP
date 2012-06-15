@@ -1,3 +1,8 @@
+/**
+ * @file player.cpp
+ * @brief Implementation of player class
+ */
+
 #include <bb/cascades/Application>
 
 #include <fcntl.h>
@@ -6,7 +11,8 @@
 #include "player.hpp"
 #include "exceptions.hpp"
 
-using ::bb::cascades::Application;
+using namespace ::bb::cascades;
+using namespace exceptions;
 
 const char* Player::video_device_url = "screen:?winid=videosamplewindowgroup&wingrp=videosamplewindowgroup";
 const char* Player::audio_device_url = "audio:default";
@@ -69,23 +75,24 @@ void Player::configureAudioVideo()
 	}
 }
 
-void Player::startPlayback()
+void Player::startPlayback(const QString& fileName)
 {
 	// Build up the path where our bundled resource is.
 	char cwd[PATH_MAX];
 	char media_file[PATH_MAX];
 	getcwd(cwd,PATH_MAX);
 
-	int rc = snprintf(media_file, PATH_MAX, "file://%s/app/native/pb_sample.mp4", cwd);
+	//int rc = snprintf(media_file, PATH_MAX, "file://%s/app/native/pb_sample.mp4", cwd);
 	//strcpy(media_file,"accounts/1000/shared/downloads/pb_sample.mp4");
 
 //	FILE* f = fopen(media_file, "r");
-	if ((rc == -1) || (rc >= PATH_MAX)) {
+	/*if ((rc == -1) || (rc >= PATH_MAX)) {
 		throw exception(EXIT_FAILURE);
-	}
+	}*/
 
 	// Start the playback.
-	if (mmr_input_attach(mmr_context, media_file, "track") != 0) {
+	//if (mmr_input_attach(mmr_context, media_file, "track") != 0) {
+	if (mmr_input_attach(mmr_context, fileName.toStdString().c_str(), "track") != 0) {
 		//const mmr_error_info_t* ptr = mmr_error_info(mmr_context);
 		throw exception(EXIT_FAILURE);
 	}
@@ -221,13 +228,13 @@ void Player::destroyScreen()
 
 //Use exceptions mechanism
 
-void Player::runPlayer()
+void Player::runPlayer(const QString& fileName)
 {
 	createWindow();
 	connectToMMR();
 	configureAudioVideo();
 	makeWindowVisible();
-	startPlayback();
+	startPlayback(fileName);
 	screen_request_events(screen_context);
 	navigator_request_events(0);
 	handleKeyboardEvents();

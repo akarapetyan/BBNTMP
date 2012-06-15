@@ -1,10 +1,27 @@
 #ifndef UTILITY_HPP_
 #define UTILITY_HPP_
 
-class utility
+/**
+ * @file utility.hpp
+ * @brief Holder for utility routines used in the application
+ */
+namespace utility
+{
+
+/**
+ * @brief class FileSystemUtility
+ * @details FileSystemUtility is intended to hold utility routines related to file system stuff
+ */
+class FileSystemUtility
 {
 public:
-	static bool getEntryListR(const QString& dir, QStringList& result, const QStringList& filters);
+	/**
+	 * @details getEntryListR get the files list in the specified directory using the specified filters.
+	 * for example get all the ".avi" files
+	 */
+	static bool getEntryListR(const QString& dir, const QStringList& filters, QStringList& result);
 };
+
+}//end of namespace
 
 #endif /* UTILITY_HPP_ */

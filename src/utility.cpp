@@ -1,29 +1,37 @@
+/**
+ * @file utility.cpp
+ * @brief Implementation of utility type classes
+ */
+
 #include <QDir>
 
 #include "utility.hpp"
 
-bool utility::getEntryListR(const QString& dir, QStringList& result, const QStringList& filters)
+namespace utility {
+
+bool FileSystemUtility::getEntryListR(const QString& dir, const QStringList& filters, QStringList& result)
 {
-        QDir currentDir(dir);
-        QDir::setCurrent(dir);
-        QStringList currentFileList = QDir::current().entryList(filters, QDir::Files);
-        if(!currentFileList.isEmpty())
-        {
-            foreach(QString item, currentFileList)
-            {
-              result.append(dir + "/" + item);
-            }
-        }
+	QDir currentDir(dir);
+	QDir::setCurrent(dir);
+	QStringList currentFileList = QDir::current().entryList(filters, QDir::Files);
+	if(!currentFileList.isEmpty())
+	{
+	    foreach(QString item, currentFileList)
+		{
+		  result.append(dir + "/" + item);
+		}
+	}
 
-        QStringList currentDirList = currentDir.entryList(QDir::Dirs);
+	QStringList currentDirList = currentDir.entryList(QDir::Dirs);
+	foreach(QString subDir, currentDirList)
+	{
+		if (subDir == "." || subDir == "..")
+			continue;
 
-        foreach(QString subDir, currentDirList)
-        {
-            if (subDir == "." || subDir == "..")
-                continue;
+		getEntryListR(dir + "/" + subDir, filters, result);
+	}
 
-            getEntryListR(dir + "/" + subDir, result, filters);
-        }
-
-        return !result.isEmpty();
+	return !result.isEmpty();
 }
+
+} //end of namespace

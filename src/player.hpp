@@ -1,6 +1,11 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+/**
+ * @file player.hpp
+ * @brief Contains the implementation of video player functionality
+ */
+
 #include <QtCore/QObject>
 
 #include <mm/renderer.h>

@@ -1,3 +1,8 @@
+/**
+ * @file player.cpp
+ * @brief Implementation of player class
+ */
+
 #include <bb/cascades/Application>
 
 #include <fcntl.h>
@@ -6,7 +11,8 @@
 #include "player.hpp"
 #include "exceptions.hpp"
 
-using ::bb::cascades::Application;
+using namespace ::bb::cascades;
+using namespace exceptions;
 
 const char* Player::video_device_url = "screen:?winid=videosamplewindowgroup&wingrp=videosamplewindowgroup";
 const char* Player::audio_device_url = "audio:default";
@@ -76,13 +82,13 @@ void Player::startPlayback(const QString& fileName)
 	char media_file[PATH_MAX];
 	getcwd(cwd,PATH_MAX);
 
-	int rc = snprintf(media_file, PATH_MAX, "file://%s/app/native/pb_sample.mp4", cwd);
+	//int rc = snprintf(media_file, PATH_MAX, "file://%s/app/native/pb_sample.mp4", cwd);
 	//strcpy(media_file,"accounts/1000/shared/downloads/pb_sample.mp4");
 
 //	FILE* f = fopen(media_file, "r");
-	if ((rc == -1) || (rc >= PATH_MAX)) {
+	/*if ((rc == -1) || (rc >= PATH_MAX)) {
 		throw exception(EXIT_FAILURE);
-	}
+	}*/
 
 	// Start the playback.
 	//if (mmr_input_attach(mmr_context, media_file, "track") != 0) {

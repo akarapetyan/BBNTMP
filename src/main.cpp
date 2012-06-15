@@ -1,3 +1,8 @@
+/**
+ * @file main.cpp
+ * @brief Contains main - the entry point function implementation
+ */
+
 #include <bb/cascades/Application>
 #include <bb/cascades/QListDataModel>
 
@@ -9,9 +14,10 @@
 #include "exceptions.hpp"
 #include "utility.hpp"
 
-#include <iostream>
 
 using namespace bb::cascades;
+using namespace utility;
+using namespace exceptions;
 
 
 //TODO for testing purposes only
@@ -34,13 +40,14 @@ int main(int argc, char **argv)
     {
     	QStringList result;
 		QStringList filters;
-		filters << "*.avi";
 		filters << "*.mp4";
-		bool b = utility::getEntryListR("/accounts/1000", result, filters);
+		filters << "*.avi";
+		bool b = FileSystemUtility::getEntryListR("/", filters, result);
 		if(b)
 		{
 			//TODO for now let's play the first found video
-			player.runPlayer(result[0]);
+			QString firstVideo = result[0];
+			player.runPlayer(firstVideo);
 		}
     }
     catch(const exception& e)

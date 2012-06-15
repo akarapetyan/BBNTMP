@@ -1,9 +1,18 @@
 #ifndef EXCEPTIONS_HPP
 #define EXCEPTIONS_HPP
 
-#include <iostream>
+/**
+ * @file exceptions.hpp
+ * @brief Holder for all kind of exceptions
+ */
 
-//base class for all the exceptions
+namespace exceptions
+{
+
+/**
+ * @brief class exception
+ * @details exception is base class for all the exceptions using in the application
+ */
 class exception
 {
 	int m_error;
@@ -12,5 +21,7 @@ public:
 	virtual ~exception();
 	virtual int what() const;
 };
+
+} //end of namespace
 
 #endif

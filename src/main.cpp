@@ -5,8 +5,8 @@
 
 #include <bb/cascades/Application>
 #include <bb/cascades/QListDataModel>
-
 #include <bb/cascades/ListView>
+#include <bb/cascades/OrientationSupport>
 #include <QVariantList>
 
 #include "window.hpp"
@@ -32,6 +32,8 @@ using namespace exceptions;
 int main(int argc, char **argv)
 {
     Application app(argc, argv);
+
+    OrientationSupport::instance().setSupportedDisplayOrientation(SupportedDisplayOrientation::All);
 
     Window mainWindow;
     Player player;

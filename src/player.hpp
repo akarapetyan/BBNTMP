@@ -48,10 +48,9 @@ private:
 	int                 audio_device_output_id;
 
 	// I/O devices
-	static const char *video_device_url;
-	static const char *audio_device_url;
-	static const char *window_group_name;
-
+	static const char* video_device_url;
+	static const char* audio_device_url;
+	static const char* window_group_name;
 };
 
 #endif /* PLAYER_HPP */
